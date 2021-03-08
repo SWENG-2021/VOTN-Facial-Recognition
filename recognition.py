@@ -66,6 +66,7 @@ def imageDetection(show_results):
 
 
 def videoDetection(show_results):
+
     cap = cv2.VideoCapture(imagePath)
     #cap = cv2.VideoCapture("rugby_footage_1.mp4")
 
@@ -80,34 +81,55 @@ def videoDetection(show_results):
     print("Video Duration: ",duration)
 
 
+    # Important variable to control the number of frames we skip before checking for face in video
+    #FRAME_SKIPS = fps
+    FRAME_SKIPS = int(fps/2)
+
     # Next we open the video up and go through frame by frame
     start_time = time.time()
-
     success, image = cap.read()
     count = 0
-    i = 0
+    difference = 0
 
     while success:
         success, image = cap.read()
 
-        # Detect if there was a face in the frame
-        gray = cv2.cvtColor(image, cv2.COLOR_BGR2GRAY)
+        # We are only checking for faces once per second
+        if difference == FRAME_SKIPS:
 
-        # Detect faces in the image
-        faces = faceCascade.detectMultiScale(gray, scaleFactor=1.1, minNeighbors=5, minSize=(30, 30))
+            # Detect if there was a face in the frame
+            gray = cv2.cvtColor(image, cv2.COLOR_BGR2GRAY)
 
-        # Display the faces in the footage
-        for (x, y, w, h) in faces:
-            cv2.rectangle(image, (x, y), (x+w, y+h), (0, 255, 0), 2)
+            # Detect faces in the image
+            faces = faceCascade.detectMultiScale(gray, scaleFactor=1.1, minNeighbors=5, minSize=(30, 30))
 
-        cv2.imshow("Faces found", image)
-        cv2.waitKey(0)
 
+            '''
+            Need to work on the facial detection part of this code...
+            There are issues with detecting obvious faces - probably an issue with some of the settings for the faceCascade on line 105
+            '''
+
+
+            if show_results:
+                # Display the faces in the footage
+                for (x, y, w, h) in faces:
+                    cv2.rectangle(image, (x, y), (x+w, y+h), (0, 255, 0), 2)
+
+                cv2.imshow("Faces found", image)
+                cv2.waitKey(0)
+                cv2.destroyAllWindows()
+
+            difference = 0
+
+        else:
+            difference += 1
 
 
 
     print("Time to analyse: --- %s seconds ---" % (time.time() - start_time))
-    print("Number of frames with faces: ",faces)
+    print("Number of frames with faces: ")
+
+    cap.release()
 
 
 
@@ -121,7 +143,7 @@ def main():
 
     if (formatSetting == 'v'):
         # We are taking in a video
-        videoDetection(show_results = True)
+        videoDetection(show_results = False)
         print("Finished Video Detection")
 
     elif (formatSetting == 'i'):
