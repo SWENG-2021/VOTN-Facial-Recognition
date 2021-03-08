@@ -1,0 +1,10 @@
+version: 0.0
+os: linux
+files:
+  - source: /
+    destination: /server
+hooks:
+ AfterAllowTraffic:
+    - location: scripts/run.sh
+      timeout: 300
+      runas: root
