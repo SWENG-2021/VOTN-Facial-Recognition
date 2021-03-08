@@ -22,7 +22,10 @@ How to use:
         py recognition.py video.mp4 v
 """
 
-import cv2, sys
+import cv2
+import sys
+import datetime
+import time
 
 
 # Get user supplied values
@@ -62,8 +65,52 @@ def imageDetection(show_results):
 
 
 
-def videoDetection():
-    pass
+def videoDetection(show_results):
+    cap = cv2.VideoCapture(imagePath)
+    #cap = cv2.VideoCapture("rugby_footage_1.mp4")
+
+
+    # Display some information about the video provided
+    frame_count = cap.get(cv2.CAP_PROP_FRAME_COUNT)
+    fps = cap.get(cv2.CAP_PROP_FPS)
+    duration = str(datetime.timedelta(seconds=int(frame_count/fps)))
+
+    print("Frame Count: ",frame_count)
+    print("Video FPS: ",fps)
+    print("Video Duration: ",duration)
+
+
+    # Next we open the video up and go through frame by frame
+    start_time = time.time()
+
+    success, image = cap.read()
+    count = 0
+    i = 0
+
+    while success:
+        success, image = cap.read()
+
+        # Detect if there was a face in the frame
+        gray = cv2.cvtColor(image, cv2.COLOR_BGR2GRAY)
+
+        # Detect faces in the image
+        faces = faceCascade.detectMultiScale(gray, scaleFactor=1.1, minNeighbors=5, minSize=(30, 30))
+
+        # Display the faces in the footage
+        for (x, y, w, h) in faces:
+            cv2.rectangle(image, (x, y), (x+w, y+h), (0, 255, 0), 2)
+
+        cv2.imshow("Faces found", image)
+        cv2.waitKey(0)
+
+
+
+
+    print("Time to analyse: --- %s seconds ---" % (time.time() - start_time))
+    print("Number of frames with faces: ",faces)
+
+
+
 
 
 
@@ -74,12 +121,12 @@ def main():
 
     if (formatSetting == 'v'):
         # We are taking in a video
-        videoDetection()
+        videoDetection(show_results = True)
         print("Finished Video Detection")
 
     elif (formatSetting == 'i'):
         # We are taking in an image
-        imageDetection(show_results=True)
+        imageDetection(show_results = True)
         print("Finished Image Detection")
 
     else:
