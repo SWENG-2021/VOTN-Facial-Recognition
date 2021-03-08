@@ -23,7 +23,7 @@ How to use:
 """
 
 import cv2, sys
-import pyautogui
+
 
 # Get user supplied values
 imagePath = sys.argv[1]
