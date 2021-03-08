@@ -6,9 +6,7 @@ opencv-python
 datetime
 
 ## How to use
-To detect faces in a still image:
-py recognition.py image.png i
+To detect faces in a still image:\npy recognition.py image.png i
 
-To detect faces in a video (mp4 or avi):
-py recognition.py video.mp4 v 
+To detect faces in a video (mp4 or avi):\npy recognition.py video.mp4 v 
 
