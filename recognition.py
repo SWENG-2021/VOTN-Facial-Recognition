@@ -88,7 +88,10 @@ def imageDetection(show_results):
         cv2.destroyAllWindows()
 
 
-
+"""
+Function to detect faces in video footage
+Supported formats: [.avi, .mp4]
+"""
 def videoDetection(show_results):
 
     cap = cv2.VideoCapture(imagePath)
@@ -164,7 +167,7 @@ def main():
 
     if (formatSetting == 'v'):
         # We are taking in a video
-        videoDetection(show_results = False)
+        videoDetection(show_results = True)
         print("Finished Video Detection")
 
     elif (formatSetting == 'i'):
