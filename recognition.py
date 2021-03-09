@@ -37,6 +37,30 @@ cascPath = "haarcascade_frontalface_default.xml"
 faceCascade = cv2.CascadeClassifier(cascPath)
 
 
+"""
+Function to resize an image while keeping scale
+Supported formats: [.jepg, .png]
+"""
+def shrinkImage(image):
+    return None
+
+
+
+"""
+Function which returns the height and width of an opencv image object
+"""
+def getImageSize(image):
+    try:
+        height, width, channels = image.shape
+        return height, width
+    except:
+        return 0,0
+
+
+'''
+Function to detect faces in a still image
+Supported formats: [.jpeg, .png]
+'''
 
 def imageDetection(show_results):
     # Read the image
@@ -130,9 +154,6 @@ def videoDetection(show_results):
     print("Number of frames with faces: ")
 
     cap.release()
-
-
-
 
 
 
