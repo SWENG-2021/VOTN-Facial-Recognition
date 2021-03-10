@@ -13,5 +13,4 @@ def webhook_post():
 def webhook_get():
     print("GET")
     print(request.json)
-    return Response(200)
 
