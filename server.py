@@ -15,5 +15,3 @@ def webhook_get():
     print(request.json)
     return Response(200)
 
-if __name__ == '__main__':
-    app.run(host='0.0.0.0',port=8080)
