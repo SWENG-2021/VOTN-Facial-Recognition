@@ -23,7 +23,7 @@ def verifyWebhook(version, timestamp, payload, signature, secret):
 	generateSignature = hmac1.hexdigest()
 
 	#check if verified webhook
-	print(not expired and signature == version+"="+generateSignature)
+	return (not expired and signature == version+"="+generateSignature)
 
 
 
@@ -52,4 +52,4 @@ sample_payload = {
 	}
 }
 
-verifyWebhook(sample_version, sample_timestamp, sample_payload, sample_signature, sample_secret)
+print(verifyWebhook(sample_version, sample_timestamp, sample_payload, sample_signature, sample_secret))
