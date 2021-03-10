@@ -3,7 +3,7 @@ from flask import Flask, request, Response
 
 app = Flask(__name__)
 
-@app.route('/', methods=['GET','POST'])
+@app.route('/', methods=['POST'])
 def webhook():
     print(request.json)
     if request.method == 'POST':
@@ -12,4 +12,4 @@ def webhook():
         return Response(status=400)
 
 if __name__ == '__main__':
-    app.run(port=80)
+    app.run()
