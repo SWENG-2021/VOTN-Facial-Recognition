@@ -3,8 +3,15 @@ from flask import Flask, request, Response
 
 app = Flask(__name__)
 
-@app.route('/')
+@app.route('/',methods=['POST'])
 def webhook():
+    print("POST")
+    print(request.json)
+    return Response(200)
+
+@app.route('/',methods=['GET'])
+def webhook():
+    print("GET")
     print(request.json)
     return Response(200)
 
