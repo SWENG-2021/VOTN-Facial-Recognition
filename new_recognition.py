@@ -67,13 +67,14 @@ def detectFacesInImage(imageLocation, known_faces, known_names):
 
         # We want to see if there are any matches that we can find
         results = face_recognition.compare_faces(known_faces, face_encoding, TOLERANCE)
-        print(results)
+        #print(results)
 
         # Now check what indexes we got a detection at to figure out the name for the face
         match = []
         for i in range(0, len(results)):
             if results[i] == True:
-                print("We found a match")
+                print("We found a match: ",known_names[i])
+                match.append(known_names[i])
 
                 # To draw a box around a face we need top left coordinate and bottom right coordinate
                 top_left = (face_location[3], face_location[0])
@@ -89,6 +90,8 @@ def detectFacesInImage(imageLocation, known_faces, known_names):
     cv2.imshow("Output",image)
     cv2.waitKey(0)
     cv2.destroyWindow("Output")
+
+    return match
 
 
 
@@ -112,4 +115,4 @@ print(known_names)
 # detectFacesInImage("unknown_faces/whothis.png", known_faces, known_names)
 #detectFacesInImage("unknown_faces/jsexton-1.png", known_faces, known_names)
 #detectFacesInImage("unknown_faces/some_players.jpg", known_faces, known_names)
-detectFacesInImage("unknown_faces/break_away.jpg", known_faces, known_names)
+print(detectFacesInImage("unknown_faces/3_amigos.jpg", known_faces, known_names))
