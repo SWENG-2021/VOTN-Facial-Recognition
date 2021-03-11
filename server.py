@@ -1,15 +1,17 @@
 ### webhook listener, using flask
-from flask import Flask, request, abort
+from flask import Flask, request, Response
 
 app = Flask(__name__)
 
-@app.route('/', methods=['POST'])
-def webhook():
-    if request.method == 'POST':
-        print(request.json)
-        return 'success', 200
-    else:
-        abort(400)
+@app.route('/',methods=['POST'])
+def webhook_post():
+    print("POST")
+    print(request.json)
+    return Response(status=200)
 
-if __name__ == '__main__':
-    app.run(host='0.0.0.0', port=8080)
+@app.route('/',methods=['GET'])
+def webhook_get():
+    print("GET")
+    print(request.json)
+    return Response(status=200)
+

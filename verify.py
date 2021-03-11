@@ -7,11 +7,35 @@
 
 import json, hmac, hashlib, math, time
 
+def verifyWebhook(version, timestamp, payload, signature, secret):
 
-signature = 'v0=a77ce6856e609c884575c2fd211d07a9ad1c3f72e19c06ff710e8f086ffca883'
-secret = 'yxSE59T0gtZOFZxw6UhLwTkhd2m8ntNSdSWnApQ0xOnMEzSoXbD8sGFP4bzb7MbS'
-timestamp = 1604004499
-payload = {
+	body = json.dumps(payload, separators=(',', ':'))
+
+	#timestamps - no older than 5 minutes
+	currentTime = math.trunc(time.time())
+	minutes = 5
+	expired = (currentTime-timestamp) > minutes*60
+
+	#generate signature
+	msg = bytes('v0:'+str(timestamp)+':'+body, "ascii")
+	hmac1 = hmac.new(bytes(secret, "ascii"), digestmod=hashlib.sha256)
+	generateSignature = hmac1.update(msg)
+	generateSignature = hmac1.hexdigest()
+
+	#check if verified webhook
+	return (not expired and signature == version+"="+generateSignature)
+
+
+
+#TESTING ONLY--------------------------------------------------------------------------------
+#sample secret key
+sample_secret = 'yxSE59T0gtZOFZxw6UhLwTkhd2m8ntNSdSWnApQ0xOnMEzSoXbD8sGFP4bzb7MbS'
+
+#sample data
+sample_version = 'v0'
+sample_signature = 'v0=a77ce6856e609c884575c2fd211d07a9ad1c3f72e19c06ff710e8f086ffca883'
+sample_timestamp = 1604004499
+sample_payload = {
 	"project": {
 		"id": "f348e9f4-f142-42f9-b3bf-478d93f0feb4"
 	},
@@ -28,19 +52,4 @@ payload = {
 	}
 }
 
-body = json.dumps(payload, separators=(',', ':'))
-
-#timestamps - no older than 5 minutes
-currentTime = math.trunc(time.time())
-minutes = 5
-expired = (currentTime-timestamp) > minutes*60
-
-#generate signature
-msg = bytes('v0:'+str(timestamp)+':'+body, "ascii")
-hmac1 = hmac.new(bytes(secret, "ascii"), digestmod=hashlib.sha256)
-generateSignature = hmac1.update(msg)
-generateSignature = hmac1.hexdigest()
-
-#check if verified webhook
-print(not expired and signature == "v0="+generateSignature)
-#print(expired and signature == "v0="+generateSignature)
+print(verifyWebhook(sample_version, sample_timestamp, sample_payload, sample_signature, sample_secret))
