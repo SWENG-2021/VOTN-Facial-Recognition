@@ -4,6 +4,7 @@
 import face_recognition
 import cv2
 import os
+import datetime
 
 
 
@@ -100,7 +101,60 @@ def detectFacesInImage(imageLocation, known_faces, known_names):
 Function to detect all faces in a video
 '''
 def detectVideoFaces(videoLocation, known_faces, known_names):
-    pass
+
+    # 1)  We open the video
+    try:
+        cap = cv2.VideoCapture(videoLocation)
+
+
+        # Display some information about the video provided
+        frame_count = cap.get(cv2.CAP_PROP_FRAME_COUNT)
+        fps = cap.get(cv2.CAP_PROP_FPS)
+        duration = str(datetime.timedelta(seconds=int(frame_count/fps)))
+
+        print("Frame Count: ",frame_count)
+        print("Video FPS: ",fps)
+        print("Video Duration: ",duration)
+
+    except Exception as e:
+        print("Video does not exist")
+
+
+
+
+    # 2) cut it up into little bits
+
+    # Important variable to control the number of frames we skip before checking for face in video
+    FRAME_SKIPS = fps
+    #FRAME_SKIPS = int(fps/2)
+
+    # Next we open the video up and go through frame by frame
+    success, image = cap.read()
+    difference = fps              # Keep track of the last time we captured a frame
+    count = 0
+
+    while success:
+
+        # If its time to analyse a frame
+        if (difference == FRAME_SKIPS):
+            # Analyse this frame
+
+            # faces = detectFacesInImage()
+            # print(faces)
+
+            print("Frame: ", count)
+            difference = 0
+        else:
+            difference += 1
+
+        count += 1
+
+        # Move onto next image
+        success, image = cap.read()
+
+    print("Ending")
+
+    # 3) for each of these little bits check for faces
 
 
 
@@ -112,7 +166,9 @@ main()
 known_faces, known_names = loadAllFaces()
 print(known_names)
 
-# detectFacesInImage("unknown_faces/whothis.png", known_faces, known_names)
-#detectFacesInImage("unknown_faces/jsexton-1.png", known_faces, known_names)
-#detectFacesInImage("unknown_faces/some_players.jpg", known_faces, known_names)
-print(detectFacesInImage("unknown_faces/3_amigos.jpg", known_faces, known_names))
+#This is where we start
+detectVideoFaces('rugby_footage_1.mp4', known_faces, known_names)
+
+
+
+#print(detectFacesInImage("unknown_faces/whothis.png", known_faces, known_names))
