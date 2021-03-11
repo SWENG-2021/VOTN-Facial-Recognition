@@ -86,9 +86,9 @@ def detectFacesInImage(imageLocation, known_faces, known_names):
                 cv2.rectangle(image, top_left, bottom_right, (255,0,0), cv2.FILLED)
                 cv2.putText(image, known_names[i], (face_location[3]+10, face_location[2]+15), cv2.FONT_HERSHEY_SIMPLEX, 0.5, (200,200,200), FONT_THICKNESS)
 
-        cv2.imshow("Output",image)
-        cv2.waitKey(0)
-        cv2.destroyWindow("Output")
+    cv2.imshow("Output",image)
+    cv2.waitKey(0)
+    cv2.destroyWindow("Output")
 
 
 
@@ -110,4 +110,6 @@ known_faces, known_names = loadAllFaces()
 print(known_names)
 
 # detectFacesInImage("unknown_faces/whothis.png", known_faces, known_names)
-detectFacesInImage("unknown_faces/jsexton-1.png", known_faces, known_names)
+#detectFacesInImage("unknown_faces/jsexton-1.png", known_faces, known_names)
+#detectFacesInImage("unknown_faces/some_players.jpg", known_faces, known_names)
+detectFacesInImage("unknown_faces/break_away.jpg", known_faces, known_names)
