@@ -9,6 +9,7 @@ import json, hmac, hashlib, math, time
 
 def verifyWebhook(version, timestamp, payload, signature, secret):
 
+	#stringify the payload
 	body = json.dumps(payload, separators=(',', ':'))
 
 	#timestamps - no older than 5 minutes
