@@ -1,5 +1,5 @@
 #!/bin/bash
-if [[ -f "$1" ]]
+if [ -f "$1" ]
 then
 	echo "Deleting file $1"
 	sudo rm "$1"
