@@ -4,6 +4,7 @@ from datetime import datetime
 from download import download
 from verify import verifyWebhook
 from os import getenv
+from metadata import  add_metadata
 app = Flask(__name__)
 
 @app.route('/webhook',methods=['POST'])
@@ -23,8 +24,11 @@ def webhook_post():
     if verified:
         asset_id = request.json["resource"]["id"]
         download(asset_id)
+        ###face recognition here
+        add_metadata(asset_id,"TEST DESCRIPTION\n AAAAAAAAAAAAAAAAAAAAA\nAAAAAAAAAAAAAAAAA")
     else:
         print("unverified request")
+
     return Response(status=200)
 
 
