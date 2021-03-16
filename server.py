@@ -25,10 +25,13 @@ def webhook_post():
     if verified:
         asset_id = request.json["resource"]["id"]
         filename = download(asset_id)
-        system("./deleteFile "+filename)
-        ##
+
         ###face recognition here
+
         add_metadata(asset_id,"TEST DESCRIPTION\n AAAAAAAAAAAAAAAAAAAAA\nAAAAAAAAAAAAAAAAA")
+
+        ###deletion
+        system("./deleteFile.sh " + filename)
     else:
         print("unverified request")
 
