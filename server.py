@@ -20,8 +20,11 @@ def webhook_post():
     print(getenv("SECRET"))
     verified = verifyWebhook("v0",timestamp,request.json,signature,getenv("SECRET"))
     print(verified)
-    asset_id = request.json["resource"]["id"]
-    download(asset_id)
+    if verified:
+        asset_id = request.json["resource"]["id"]
+        download(asset_id)
+    else:
+        print("unverified request")
     return Response(status=200)
 
 
