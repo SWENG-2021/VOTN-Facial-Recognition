@@ -15,6 +15,9 @@ def webhook_post():
     headers = request.headers
     timestamp = int(headers["X-Frameio-Request-Timestamp"])
     signature = headers["X-Frameio-Signature"]
+    print(timestamp)
+    print(signature)
+    print(getenv("SECRET"))
     verified = verifyWebhook("v0",timestamp,request.json,signature,getenv("SECRET"))
     print(verified)
     asset_id = request.json["resource"]["id"]
