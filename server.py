@@ -13,15 +13,12 @@ def webhook_post():
     print("Current Time =", current_time)
     print(request.json)
     headers = request.headers
-    timestamp = headers["X-Frameio-Request-Timestamp"]
+    timestamp = int(headers["X-Frameio-Request-Timestamp"])
     signature = headers["X-Frameio-Signature"]
     verified = verifyWebhook("v0",timestamp,request.json,signature,getenv("SECRET"))
     print(verified)
     asset_id = request.json["resource"]["id"]
     download(asset_id)
-
-
-
     return Response(status=200)
 
 
