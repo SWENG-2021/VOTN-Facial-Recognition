@@ -31,7 +31,7 @@ def webhook_post():
         add_metadata(asset_id,"TEST DESCRIPTION\n AAAAAAAAAAAAAAAAAAAAA\nAAAAAAAAAAAAAAAAA")
 
         ###deletion
-        system("sudo sh deleteFile.sh " + filename)
+        system("sudo rm " + filename)
     else:
         print("unverified request")
 
