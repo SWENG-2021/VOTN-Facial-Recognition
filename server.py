@@ -4,6 +4,7 @@ from datetime import datetime
 from download import download
 from verify import verifyWebhook
 from os import getenv
+from os import system
 from metadata import  add_metadata
 app = Flask(__name__)
 
@@ -23,7 +24,9 @@ def webhook_post():
     print(verified)
     if verified:
         asset_id = request.json["resource"]["id"]
-        download(asset_id)
+        filename = download(asset_id)
+        system("./deleteFile "+filename)
+        ##
         ###face recognition here
         add_metadata(asset_id,"TEST DESCRIPTION\n AAAAAAAAAAAAAAAAAAAAA\nAAAAAAAAAAAAAAAAA")
     else:
