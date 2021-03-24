@@ -5,6 +5,7 @@ import face_recognition
 import cv2
 import os
 import datetime
+import traceback
 
 
 
@@ -12,7 +13,7 @@ import datetime
 
 KNOWN_FACES_DIR = 'known_faces'
 UNKNOWN_FACES_DIR = 'unknown_faces'
-TOLERANCE = 0.6            # Lower value for more accuracy
+TOLERANCE = 0.55            # Lower value for more accuracy
 FRAME_THICKNESS = 3        # The number of pixels of the frame will be around detected face
 FONT_THICKNESS = 2
 MODEL = 'hog'              # Set to cnn if you want to use GPU setup, hog for CPU setup
@@ -50,9 +51,9 @@ def loadAllFaces():
 
 
 '''
-Function to detect all faces in an image
+Function to detect all faces in an image from a file location
 '''
-def detectFacesInImage(imageLocation, known_faces, known_names):
+def detectFacesInImageFile(imageLocation, known_faces, known_names):
     # So we get the image that we want want to analyse
     image = face_recognition.load_image_file(imageLocation)
 
@@ -96,13 +97,58 @@ def detectFacesInImage(imageLocation, known_faces, known_names):
 
 
 
+'''
+Function to detect all faces in an image from an image object
+'''
+def detectFacesInImage(imageObject, known_faces, known_names, debug_mode):
+    image = imageObject
+
+    # Find all the locations in the image which contain faces
+    locations = face_recognition.face_locations(image, model=MODEL)
+    encodings = face_recognition.face_encodings(image, locations)
+
+    # Next we want to be able to draw boxes around the faces on the image
+    image = cv2.cvtColor(image, cv2.COLOR_RGB2BGR)
+
+    # Now iterate over the encodings and locations
+    match = []
+    for face_encoding, face_location in zip(encodings, locations):
+
+        # We want to see if there are any matches that we can find
+        results = face_recognition.compare_faces(known_faces, face_encoding, TOLERANCE)
+        #print(results)
+
+        # Now check what indexes we got a detection at to figure out the name for the face
+        for i in range(0, len(results)):
+            if results[i] == True:
+                print("We found a match: ",known_names[i])
+                match.append(known_names[i])
+
+                if (debug_mode):
+                    # To draw a box around a face we need top left coordinate and bottom right coordinate
+                    top_left = (face_location[3], face_location[0])
+                    bottom_right = (face_location[1], face_location[2])
+                    cv2.rectangle(image, top_left, bottom_right, (255,0,0), FRAME_THICKNESS)
+
+                    # Next draw a little box to have the name of the person
+                    top_left = (face_location[3], face_location[2])
+                    bottom_right = (face_location[1], face_location[2]+22)
+                    cv2.rectangle(image, top_left, bottom_right, (255,0,0), cv2.FILLED)
+                    cv2.putText(image, known_names[i], (face_location[3]+10, face_location[2]+15), cv2.FONT_HERSHEY_SIMPLEX, 0.5, (200,200,200), FONT_THICKNESS)
+
+    if (debug_mode):
+        cv2.imshow("Output",image)
+        cv2.waitKey(0)
+        cv2.destroyWindow("Output")
+
+    return match
+
+
 
 '''
 Function to detect all faces in a video
 '''
-def detectVideoFaces(videoLocation, known_faces, known_names):
-
-    # 1)  We open the video
+def detectVideoFaces(videoLocation, known_faces, known_names, debug_mode):
     try:
         cap = cv2.VideoCapture(videoLocation)
 
@@ -116,59 +162,67 @@ def detectVideoFaces(videoLocation, known_faces, known_names):
         print("Video FPS: ",fps)
         print("Video Duration: ",duration)
 
-    except Exception as e:
-        print("Video does not exist")
+        # Important variable to control the number of frames skiped before face check
+        frame_skips = fps
 
-
-
-
-    # 2) cut it up into little bits
-
-    # Important variable to control the number of frames we skip before checking for face in video
-    FRAME_SKIPS = fps
-    #FRAME_SKIPS = int(fps/2)
-
-    # Next we open the video up and go through frame by frame
-    success, image = cap.read()
-    difference = fps              # Keep track of the last time we captured a frame
-    count = 0
-
-    while success:
-
-        # If its time to analyse a frame
-        if (difference == FRAME_SKIPS):
-            # Analyse this frame
-
-            # faces = detectFacesInImage()
-            # print(faces)
-
-            print("Frame: ", count)
-            difference = 0
-        else:
-            difference += 1
-
-        count += 1
-
-        # Move onto next image
+        # Open up the video and go through it frame by frame
         success, image = cap.read()
+        difference = fps
+        count = 0
 
-    print("Ending")
+        # We create a dictionary to store a player and the frames they appear at
+        people_dict = {}
 
-    # 3) for each of these little bits check for faces
+        while success:
+            if (difference == frame_skips):
+                print("Frame: ",count)
+
+                # See if there was a match with a face
+                current_match = detectFacesInImage(image, known_faces, known_names, debug_mode=debug_mode)
+
+                # Make sure it was an actual face that was detected
+                if (current_match != []):
+
+                    # For all the people detected in this frame
+                    for person in current_match:
+
+                        # Check if they are already in the dictionary
+                        if (person in people_dict):
+                            # They are in the video so append this frame number to this persons list
+                            people_dict[person].append(count)
+                        else:
+                            # They are not in the video so add them to the dictionary
+                            people_dict[person] = []
+                            people_dict[person].append(count)
+
+
+                difference = 0
+            else:
+                difference += 1
+
+            count += 1
+            success, image = cap.read()
+
+
+        return people_dict
+
+    except Exception as e:
+        traceback.print_exc()
+        #print("---- Ran into an issue----\n",e)
+
+
+    return None
 
 
 
 def main():
-    print("\nTesting main() Function")
+    known_faces, known_names = loadAllFaces()
+    print(known_names)
+
+    # Detecting faces in Video
+    print(detectVideoFaces('rugby_footage_1.mp4', known_faces, known_names, debug_mode=False))
+
+    # Detect faces in Image
+    #print(detectFacesInImage("unknown_faces/whothis.png", known_faces, known_names))
 
 main()
-
-known_faces, known_names = loadAllFaces()
-print(known_names)
-
-#This is where we start
-detectVideoFaces('rugby_footage_1.mp4', known_faces, known_names)
-
-
-
-#print(detectFacesInImage("unknown_faces/whothis.png", known_faces, known_names))
