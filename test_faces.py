@@ -8,6 +8,11 @@ import new_recognition
 from tabulate import tabulate
 
 
+# To use: python  test_faces.py  Aki-Bundee
+# Or alternatively any other player that has a folder in both the known_faces and unknown_faces folder
+# The program will show which template pictures succeed and dont succeed in getting a match with an unknown image
+
+
 def main():
     try:
         player = sys.argv[1]
@@ -71,7 +76,7 @@ def test_face(player):
             for test_photo in os.listdir(f"unknown_faces/{the_country}/{the_player_name}"):
                 print("Testing against: ",test_photo)
 
-                image = face_recognition.load_image_file(f"unknown_faces/Ireland/Aki-Bundee/{test_photo}")
+                image = face_recognition.load_image_file(f"unknown_faces/{the_country}/{the_player_name}/{test_photo}")
                 match = new_recognition.detectFacesInImage(image, known_faces, known_names, debug_mode=False)
                 no_match = [x for x in known_names if x not in match]
 
