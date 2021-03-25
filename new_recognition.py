@@ -64,15 +64,19 @@ def detectFacesInImageFile(imageLocation, known_faces, known_names):
     # Next we want to be able to draw boxes around the faces on the image
     image = cv2.cvtColor(image, cv2.COLOR_RGB2BGR)
 
+    # Now check what indexes we got a detection at to figure out the name for the face
+    match = []
+
     # Now iterate over the encodings and locations
     for face_encoding, face_location in zip(encodings, locations):
 
         # We want to see if there are any matches that we can find
         results = face_recognition.compare_faces(known_faces, face_encoding, TOLERANCE)
-        #print(results)
+        print(results)
 
-        # Now check what indexes we got a detection at to figure out the name for the face
-        match = []
+        drawn_face = False
+
+        # Check each player loaded into the player database
         for i in range(0, len(results)):
             if results[i] == True:
                 print("We found a match: ",known_names[i])
@@ -88,6 +92,22 @@ def detectFacesInImageFile(imageLocation, known_faces, known_names):
                 bottom_right = (face_location[1], face_location[2]+22)
                 cv2.rectangle(image, top_left, bottom_right, (255,0,0), cv2.FILLED)
                 cv2.putText(image, known_names[i], (face_location[3]+10, face_location[2]+15), cv2.FONT_HERSHEY_SIMPLEX, 0.5, (200,200,200), FONT_THICKNESS)
+
+                drawn_face = True
+
+        if (not drawn_face):
+            # To draw a box around a face we need top left coordinate and bottom right coordinate
+            top_left = (face_location[3], face_location[0])
+            bottom_right = (face_location[1], face_location[2])
+            cv2.rectangle(image, top_left, bottom_right, (0,0,255), FRAME_THICKNESS)
+
+            # Next draw a little box to have the name of the person
+            top_left = (face_location[3], face_location[2])
+            bottom_right = (face_location[1], face_location[2]+22)
+            cv2.rectangle(image, top_left, bottom_right, (0,0,255), cv2.FILLED)
+            cv2.putText(image, "Unknown", (face_location[3]+10, face_location[2]+15), cv2.FONT_HERSHEY_SIMPLEX, 0.5, (200,200,200), FONT_THICKNESS)
+
+
 
     cv2.imshow("Output",image)
     cv2.waitKey(0)
@@ -112,19 +132,24 @@ def detectFacesInImage(imageObject, known_faces, known_names, debug_mode):
 
     # Now iterate over the encodings and locations
     match = []
+
+    # For each face on the screen
     for face_encoding, face_location in zip(encodings, locations):
 
         # We want to see if there are any matches that we can find
         results = face_recognition.compare_faces(known_faces, face_encoding, TOLERANCE)
         #print(results)
 
+        draw_face = False
+
         # Now check what indexes we got a detection at to figure out the name for the face
         for i in range(0, len(results)):
             if results[i] == True:
-                print("We found a match: ",known_names[i])
                 match.append(known_names[i])
 
                 if (debug_mode):
+                    print("We found a match: ",known_names[i])
+
                     # To draw a box around a face we need top left coordinate and bottom right coordinate
                     top_left = (face_location[3], face_location[0])
                     bottom_right = (face_location[1], face_location[2])
@@ -135,6 +160,22 @@ def detectFacesInImage(imageObject, known_faces, known_names, debug_mode):
                     bottom_right = (face_location[1], face_location[2]+22)
                     cv2.rectangle(image, top_left, bottom_right, (255,0,0), cv2.FILLED)
                     cv2.putText(image, known_names[i], (face_location[3]+10, face_location[2]+15), cv2.FONT_HERSHEY_SIMPLEX, 0.5, (200,200,200), FONT_THICKNESS)
+
+                    draw_face = True
+
+
+        if (not draw_face and debug_mode):
+            # To draw a box around a face we need top left coordinate and bottom right coordinate
+            top_left = (face_location[3], face_location[0])
+            bottom_right = (face_location[1], face_location[2])
+            cv2.rectangle(image, top_left, bottom_right, (0,0,255), FRAME_THICKNESS)
+
+            # Next draw a little box to have the name of the person
+            top_left = (face_location[3], face_location[2])
+            bottom_right = (face_location[1], face_location[2]+22)
+            cv2.rectangle(image, top_left, bottom_right, (0,0,255), cv2.FILLED)
+            cv2.putText(image, "Unknown", (face_location[3]+10, face_location[2]+15), cv2.FONT_HERSHEY_SIMPLEX, 0.5, (200,200,200), FONT_THICKNESS)
+
 
     if (debug_mode):
         cv2.imshow("Output",image)
@@ -156,10 +197,13 @@ def detectVideoFaces(videoLocation, known_faces, known_names, debug_mode):
         # Display some information about the video provided
         frame_count = cap.get(cv2.CAP_PROP_FRAME_COUNT)
         fps = cap.get(cv2.CAP_PROP_FPS)
+        if (fps == 0):
+            fps = 1
+
         duration = str(datetime.timedelta(seconds=int(frame_count/fps)))
 
-        print("Frame Count: ",frame_count)
         print("Video FPS: ",fps)
+        print("Frame Count: ",frame_count)
         print("Video Duration: ",duration)
 
         # Important variable to control the number of frames skiped before face check
@@ -174,8 +218,15 @@ def detectVideoFaces(videoLocation, known_faces, known_names, debug_mode):
         people_dict = {}
 
         while success:
+
             if (difference == frame_skips):
-                print("Frame: ",count)
+
+                if (debug_mode):
+                    print("Frame: ",count)
+                else:
+                    # Just a little thing to report on the progress of the detection in the terminal
+                    print("Progress:",(count/frame_count), end="\r")
+
 
                 # See if there was a match with a face
                 current_match = detectFacesInImage(image, known_faces, known_names, debug_mode=debug_mode)
@@ -220,9 +271,15 @@ def main():
     print(known_names)
 
     # Detecting faces in Video
-    print(detectVideoFaces('rugby_footage_1.mp4', known_faces, known_names, debug_mode=False))
+    #print(detectVideoFaces('rugby_footage_1.mp4', known_faces, known_names, debug_mode=True))
+    print(detectVideoFaces('IrelandVFrance.mp4', known_faces, known_names, debug_mode=True))
+    #print(detectVideoFaces('LEINSTERVULSTER TIL.mp4', known_faces, known_names, debug_mode=True))
 
     # Detect faces in Image
     #print(detectFacesInImage("unknown_faces/whothis.png", known_faces, known_names))
+
+    # Detect faces in image from path
+    #print(detectFacesInImageFile("unknown_faces/3_amigos.jpg", known_faces, known_names))
+
 
 main()
