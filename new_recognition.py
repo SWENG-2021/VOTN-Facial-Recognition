@@ -118,7 +118,7 @@ def detectFacesInImageFile(imageLocation, known_faces, known_names):
 
 
 '''
-Function to detect all faces in an image from an image object
+Function to detect all faces in an image from an image object, returns all the matches made
 '''
 def detectFacesInImage(imageObject, known_faces, known_names, debug_mode):
     image = imageObject
@@ -128,7 +128,7 @@ def detectFacesInImage(imageObject, known_faces, known_names, debug_mode):
     encodings = face_recognition.face_encodings(image, locations)
 
     # Next we want to be able to draw boxes around the faces on the image
-    image = cv2.cvtColor(image, cv2.COLOR_RGB2BGR)
+    #image = cv2.cvtColor(image, cv2.COLOR_RGB2BGR)
 
     # Now iterate over the encodings and locations
     match = []
@@ -266,7 +266,7 @@ def detectVideoFaces(videoLocation, known_faces, known_names, debug_mode):
 
 
 
-def main():
+if __name__ == "__main__":
     known_faces, known_names = loadAllFaces()
     print(known_names)
 
@@ -280,6 +280,3 @@ def main():
 
     # Detect faces in image from path
     #print(detectFacesInImageFile("unknown_faces/3_amigos.jpg", known_faces, known_names))
-
-
-main()
