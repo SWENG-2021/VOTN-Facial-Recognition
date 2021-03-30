@@ -5,7 +5,7 @@ from download import download
 from verify import verifyWebhook
 from metadata import  add_metadata
 import os 
-
+import threading
 app = Flask(__name__)
 
 @app.route('/webhook',methods=['POST'])
@@ -24,17 +24,20 @@ def webhook_post():
     print(verified)
     if verified:
         asset_id = request.json["resource"]["id"]
-        filename = download(asset_id)
-
-        ###face recognition here
-
-        add_metadata(asset_id,"TEST DESCRIPTION\n AAAAAAAAAAAAAAAAAAAAA\nAAAAAAAAAAAAAAAAA")
-
-        ###deletion
-        os.remove(filename)
+        th = threading.Thread(target=processVideo(),args=(asset_id,),daemon=True)
+        th.start()
     else:
         print("unverified request")
 
     return Response(status=200)
 
 
+def processVideo(asset_id):
+    filename = download(asset_id)
+
+    ###face recognition here
+
+    add_metadata(asset_id, "TEST DESCRIPTION\n AAAAAAAAAAAAAAAAAAAAA\nAAAAAAAAAAAAAAAAA")
+
+    ###deletion
+    os.remove(filename)
