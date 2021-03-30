@@ -24,7 +24,7 @@ def webhook_post():
     print(verified)
     if verified:
         asset_id = request.json["resource"]["id"]
-        th = threading.Thread(target=processVideo(),args=(asset_id,),daemon=True)
+        th = threading.Thread(target=processVideo,args=(asset_id,),daemon=True)
         th.start()
     else:
         print("unverified request")
