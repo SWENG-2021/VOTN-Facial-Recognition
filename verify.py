@@ -30,7 +30,7 @@ def verifyWebhook(version, timestamp, payload, signature, secret):
 
 #TESTING ONLY--------------------------------------------------------------------------------
 #sample secret key
-sample_secret = 'yxSE59T0gtZOFZxw6UhLwTkhd2m8ntNSdSWnApQ0xOnMEzSoXbD8sGFP4bzb7MbS'
+'''sample_secret = 'yxSE59T0gtZOFZxw6UhLwTkhd2m8ntNSdSWnApQ0xOnMEzSoXbD8sGFP4bzb7MbS'
 
 #sample data
 sample_version = 'v0'
@@ -53,4 +53,4 @@ sample_payload = {
 	}
 }
 
-print(verifyWebhook(sample_version, sample_timestamp, sample_payload, sample_signature, sample_secret))
+print(verifyWebhook(sample_version, sample_timestamp, sample_payload, sample_signature, sample_secret))'''
