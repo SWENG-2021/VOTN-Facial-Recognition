@@ -4,6 +4,7 @@ from datetime import datetime
 from download import download
 from verify import verifyWebhook
 from metadata import  add_metadata
+from new_recognition import loadAllFaces, detectVideoFaces
 import os 
 import threading
 app = Flask(__name__)
@@ -36,8 +37,21 @@ def processVideo(asset_id):
     filename = download(asset_id)
 
     ###face recognition here
-
-    add_metadata(asset_id, "TEST DESCRIPTION\n AAAAAAAAAAAAAAAAAAAAA\nAAAAAAAAAAAAAAAAA")
+    description = detect_faces(filename)
+    add_metadata(asset_id, description)
 
     ###deletion
     os.remove(filename)
+
+
+def detect_faces(filename):
+    #face recognition
+    known_faces, known_names = loadAllFaces()
+    faces = detectVideoFaces(filename, known_faces, known_names, debug_mode=False)
+
+    #format into a descrption
+    desc = ""
+    for face in faces:
+        desc += face+"\n"
+
+    return desc
