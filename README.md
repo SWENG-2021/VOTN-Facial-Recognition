@@ -1,5 +1,7 @@
 # VOTN-Facial-Recognition
-The SWENG-2021 Project, Group 37: [Connor](https://github.com/conorlolynch), Holly, Barry, Michal, David, Pavel
+The SWENG-2021 Project, Group 37: [Conor](https://github.com/conorlolynch), [Holly](https://github.com/hollymcevoy), [Barry](https://github.com/barryos112), [Michal](https://github.com/swiercm), [David](https://github.com/david-olowookere), [Pavel](https://github.com/cppavel). 
+
+A facial recognition app integrated into frame.io workflow. 
 
 ## Prerequisites
 `opencv-python`\
