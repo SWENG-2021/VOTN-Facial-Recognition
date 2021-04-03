@@ -273,8 +273,8 @@ if __name__ == "__main__":
     print(known_names)
 
     # Detecting faces in Video
-    #print(detectVideoFaces('rugby_footage_1.mp4', known_faces, known_names, debug_mode=True))
-    print(detectVideoFaces('IrelandVFrance.mp4', known_faces, known_names, debug_mode=True))
+    print(detectVideoFaces('rugby_footage_1.mp4', known_faces, known_names, debug_mode=True))
+    #print(detectVideoFaces('IrelandVFrance.mp4', known_faces, known_names, debug_mode=True))
     #print(detectVideoFaces('LEINSTERVULSTER TIL.mp4', known_faces, known_names, debug_mode=True))
 
     # Detect faces in Image
