@@ -1,6 +1,7 @@
 virtualenv
 cmake
 face_recognition
+skbuild
 opencv-python
 gunicorn
 frameioclient
