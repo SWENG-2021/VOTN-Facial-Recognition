@@ -192,7 +192,7 @@ Function to detect all faces in a video
 def detectVideoFaces(videoLocation, known_faces, known_names, debug_mode):
     try:
         print("Recognition running on: " + videoLocation)
-        
+        print(cv2.getBuildInformation())
         cap = cv2.VideoCapture(videoLocation)
 
 
