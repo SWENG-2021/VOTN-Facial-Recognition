@@ -1,0 +1,6 @@
+virtualenv
+face_recognition
+opencv-python
+gunicorn
+frameioclient
+flask
