@@ -42,7 +42,7 @@ def processVideo(asset_id):
     
     description = detect_faces(filename)
     
-    print("Sending metadata to frame.io")
+    print("Sending metadata to frame.io: " + description)
     
     add_metadata(asset_id, description)
 
