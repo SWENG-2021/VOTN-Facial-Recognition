@@ -35,12 +35,19 @@ def webhook_post():
 
 def processVideo(asset_id):
     filename = download(asset_id)
-
-    ###face recognition here
+    
+    print("Succesfully downloaded: " + filename)
+    
+    print("Starting facial recognition")
+    
     description = detect_faces(filename)
+    
+    print("Sending metadata to frame.io")
+    
     add_metadata(asset_id, description)
 
-    ###deletion
+    print("Deleted the file: " + filename)
+    
     os.remove(filename)
 
 
