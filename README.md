@@ -1,5 +1,5 @@
 # VOTN-Facial-Recognition
-The SWENG-2021 Project where we will be developing a Facial Recognition Platform for our client.
+The SWENG-2021 Project, Group 37: [Connor](https://github.com/conorlolynch), Holly, Barry, Michal, David, Pavel
 
 ## Prerequisites
 `opencv-python`\
