@@ -48,7 +48,7 @@ def processVideo(asset_id):
 
     print("Deleted the file: " + filename)
     
-    # os.remove(filename)
+    os.remove(filename)
 
 
 def detect_faces(filename):
