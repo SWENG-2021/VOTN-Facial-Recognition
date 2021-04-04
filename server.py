@@ -7,6 +7,7 @@ from metadata import  add_metadata
 from new_recognition import loadAllFaces, detectVideoFaces
 import os 
 import threading
+import json
 app = Flask(__name__)
 
 @app.route('/webhook',methods=['POST'])
@@ -57,8 +58,7 @@ def detect_faces(filename):
     faces = detectVideoFaces(filename, known_faces, known_names, debug_mode=False)
 
     #format into a descrption
-    desc = ""
-    for face in faces:
-        desc += face+"\n"
+    
+    desc = json.dumps(faces)
 
     return desc
