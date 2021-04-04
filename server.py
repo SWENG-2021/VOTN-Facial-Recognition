@@ -59,6 +59,12 @@ def detect_faces(filename):
 
     #format into a descrption
     
-    desc = json.dumps(faces)
-
+    desc = ""
+    
+    for face in faces:
+        desc = desc + str(face) +": "
+        for elem in faces[face]:
+            desc = desc + str(elem) +" "
+        desc = desc + "\n"
+        
     return desc
