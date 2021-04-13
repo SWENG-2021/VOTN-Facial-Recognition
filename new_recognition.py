@@ -191,6 +191,8 @@ Function to detect all faces in a video
 '''
 def detectVideoFaces(videoLocation, known_faces, known_names, debug_mode):
     try:
+        print("Recognition running on: " + videoLocation)
+        print(cv2.getBuildInformation())
         cap = cv2.VideoCapture(videoLocation)
 
 
@@ -255,7 +257,7 @@ def detectVideoFaces(videoLocation, known_faces, known_names, debug_mode):
             success, image = cap.read()
 
 
-        return people_dict
+        return timestamps(faces_dict=people_dict,fps=fps,sensitivity=5)
 
     except Exception as e:
         traceback.print_exc()
@@ -265,14 +267,44 @@ def detectVideoFaces(videoLocation, known_faces, known_names, debug_mode):
     return None
 
 
+def timestamps(faces_dict, fps, sensitivity):
+    for face in faces_dict:
+        for i in range(0, len(faces_dict[face])):
+            faces_dict[face][i] = faces_dict[face][i]/fps
+
+    results = {}
+
+    for face in faces_dict:
+        results[face] = []
+        previous = faces_dict[face][0]
+        last = faces_dict[face][0]
+
+        for i in range(1,len(faces_dict[face])):
+            if faces_dict[face][i] - previous > sensitivity:
+                s = get_minutes_seconds(last) + " - " + get_minutes_seconds(faces_dict[face][i - 1])
+                results[face].append(s)
+                last = faces_dict[face][i]
+
+            previous = faces_dict[face][i]
+
+        results[face].append(get_minutes_seconds(last) + " - " + get_minutes_seconds(faces_dict[face][len(faces_dict[face])-1]))
+
+    return  results
+
+
+
+def get_minutes_seconds(x):
+    return str(int(x/60)) +":" +str("{:02d}".format(round(x - int(x/60)*60)))
+
+
 
 if __name__ == "__main__":
     known_faces, known_names = loadAllFaces()
     print(known_names)
 
     # Detecting faces in Video
-    #print(detectVideoFaces('rugby_footage_1.mp4', known_faces, known_names, debug_mode=True))
-    print(detectVideoFaces('IrelandVFrance.mp4', known_faces, known_names, debug_mode=True))
+    print(detectVideoFaces('rugby_footage_1.mp4', known_faces, known_names, debug_mode=True))
+    #print(detectVideoFaces('IrelandVFrance.mp4', known_faces, known_names, debug_mode=True))
     #print(detectVideoFaces('LEINSTERVULSTER TIL.mp4', known_faces, known_names, debug_mode=True))
 
     # Detect faces in Image

@@ -1,0 +1,8 @@
+virtualenv
+cmake
+face_recognition
+scikit-build
+opencv-python
+gunicorn
+frameioclient
+flask

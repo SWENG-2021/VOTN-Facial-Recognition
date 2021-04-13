@@ -3,9 +3,11 @@ from flask import Flask, request, Response
 from datetime import datetime
 from download import download
 from verify import verifyWebhook
-from os import getenv
-from os import system
 from metadata import  add_metadata
+from new_recognition import loadAllFaces, detectVideoFaces
+import os 
+import threading
+import json
 app = Flask(__name__)
 
 @app.route('/webhook',methods=['POST'])
@@ -19,22 +21,50 @@ def webhook_post():
     signature = headers["X-Frameio-Signature"]
     print(timestamp)
     print(signature)
-    print(getenv("SECRET"))
-    verified = verifyWebhook("v0",timestamp,request.json,signature,getenv("SECRET"))
+    print(os.getenv("SECRET"))
+    verified = verifyWebhook("v0",timestamp,request.json,signature,os.getenv("SECRET"))
     print(verified)
     if verified:
         asset_id = request.json["resource"]["id"]
-        filename = download(asset_id)
-
-        ###face recognition here
-
-        add_metadata(asset_id,"TEST DESCRIPTION\n AAAAAAAAAAAAAAAAAAAAA\nAAAAAAAAAAAAAAAAA")
-
-        ###deletion
-        system("sudo rm " + filename)
+        th = threading.Thread(target=processVideo,args=(asset_id,),daemon=True)
+        th.start()
     else:
         print("unverified request")
 
     return Response(status=200)
 
 
+def processVideo(asset_id):
+    filename = download(asset_id)
+    
+    print("Succesfully downloaded: " + filename)
+    
+    print("Starting facial recognition")
+    
+    description = detect_faces(filename)
+    
+    print("Sending metadata to frame.io: " + description)
+    
+    add_metadata(asset_id, description)
+
+    print("Deleted the file: " + filename)
+    
+    os.remove(filename)
+
+
+def detect_faces(filename):
+    #face recognition
+    known_faces, known_names = loadAllFaces()
+    faces = detectVideoFaces(filename, known_faces, known_names, debug_mode=False)
+
+    #format into a descrption
+    
+    desc = ""
+    
+    for face in faces:
+        desc = desc + str(face) +": "
+        for elem in faces[face]:
+            desc = desc + str(elem) +" "
+        desc = desc + "\n"
+        
+    return desc
