@@ -1,3 +1,4 @@
+sudo bash
 sudo apt-get update
 sudo apt install ffmpeg 
 sudo apt-get install python3-pip python3-dev nginx
@@ -12,7 +13,7 @@ sudo ln -f -s /etc/nginx/sites-available/votn.com /etc/nginx/sites-enabled/votn.
 sudo service nginx restart
 sudo pip3 install virtualenv
 sudo virtualenv venv-api
-sudo -s source venv-api/bin/activate
+sudo source venv-api/bin/activate
 sudo pip3 install -r requirements.txt
 sudo pip3 install gunicorn
 sudo gunicorn server:app
