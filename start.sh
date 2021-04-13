@@ -5,7 +5,7 @@ sudo rm /etc/nginx/sites-enabled/default
 sudo rm /etc/nginx/sites-available/default
 sudo touch /etc/nginx/sites-available/votn.com
 sudo chown -R $USER:$USER /etc/nginx/sites-available/votn.com
-sudo cat [server_config] > [/etc/nginx/sites-available/votn.com]
+sudo cat server_config > /etc/nginx/sites-available/votn.com
 sudo sed -i 's/_serv1_/www.votn.com/' /etc/nginx/sites-available/votn.com
 sudo sed -i 's/_serv2_/votn.com/' /etc/nginx/sites-available/votn.com
 sudo ln -f -s /etc/nginx/sites-available/votn.com /etc/nginx/sites-enabled/votn.com
