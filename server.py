@@ -57,6 +57,7 @@ def downloadImage(asset_id):
     else:
         print("File is a compatible image!")
         print("Moving image...")
+        os.mkdir(os.path.join(os.getcwd(), "known_faces", "newly_added_faces"))
         os.mkdir(os.path.join(os.getcwd(),"known_faces","newly_added_faces",directory_name))
         shutil.move(filename,os.path.join(os.getcwd(),"known_faces","newly_added_faces",directory_name,filename))
         print("Succesfully added image to known faces")
