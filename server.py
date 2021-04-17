@@ -47,6 +47,8 @@ def downloadImage(asset_id):
 
     directory_name, file_extension = os.path.splitext(filename)
 
+    print("file extension: " + file_extension)
+
     if ((file_extension != ".jpg") or (file_extension != ".png")):
         os.remove(filename)
         print("unsupported image extension")
@@ -85,6 +87,8 @@ def processVideo(asset_id):
     filename = download(asset_id)
 
     file, file_extension = os.path.splitext(filename)
+
+    print("file extension: " + file_extension)
 
     if(file_extension != ".mov" and file_extension != ".avi"
             and file_extension != ".m4v" and file_extension != ".mp4"):
