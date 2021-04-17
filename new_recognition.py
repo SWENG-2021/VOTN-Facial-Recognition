@@ -42,7 +42,6 @@ def loadAllFaces():
 
                 # Here is where we do some image processing
                 image = face_recognition.load_image_file(f"{KNOWN_FACES_DIR}/{country}/{player}/{filename}")
-                print(image)
                 encoding = face_recognition.face_encodings(image)[0]
                 known_faces.append(encoding)
                 known_names.append(player)
