@@ -48,6 +48,7 @@ def downloadImage(asset_id):
     directory_name, file_extension = os.path.splitext(filename)
 
     if ((file_extension != ".jpg") or (file_extension != ".png")):
+        os.remove(filename)
         print("unsupported image extension")
         return
     else:
