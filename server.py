@@ -57,9 +57,14 @@ def downloadImage(asset_id):
     else:
         print("File is a compatible image!")
         print("Moving image...")
-        os.mkdir(os.path.join(os.getcwd(), "known_faces", "newly_added_faces"))
-        os.mkdir(os.path.join(os.getcwd(),"known_faces","newly_added_faces",directory_name))
-        shutil.move(filename,os.path.join(os.getcwd(),"known_faces","newly_added_faces",directory_name,filename))
+        if not os.path.isdir(os.path.join(os.getcwd(), "known_faces", "newly_added_faces")):
+            os.mkdir(os.path.join(os.getcwd(), "known_faces", "newly_added_faces"))
+        if not os.path.isdir(os.path.join(os.getcwd(),"known_faces","newly_added_faces",directory_name)):
+            os.mkdir(os.path.join(os.getcwd(),"known_faces","newly_added_faces",directory_name))
+        if not os.path.exists(os.path.join(os.getcwd(),"known_faces","newly_added_faces",directory_name,filename)):
+            shutil.move(filename,os.path.join(os.getcwd(),"known_faces","newly_added_faces",directory_name,filename))
+        else:
+            print("file with such name already exists")
         print("Succesfully added image to known faces")
 
 @app.route('/webhook',methods=['POST'])
