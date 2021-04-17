@@ -52,12 +52,14 @@ def downloadImage(asset_id):
     if ((file_extension != ".jpg") and (file_extension != ".png")):
         os.remove(filename)
         print("unsupported image extension")
+        print("file removed")
         return
     else:
         print("File is a compatible image!")
         print("Moving image...")
         os.mkdir(os.path.join(os.getcwd(),"known_faces",directory_name))
         shutil.move(filename,os.path.join(os.getcwd(),"known_faces",directory_name,filename))
+        print("Succesfully added image to known faces")
 
 @app.route('/webhook',methods=['POST'])
 def webhook_post():
@@ -82,7 +84,6 @@ def webhook_post():
 
     return Response(status=200)
 
-
 def processVideo(asset_id):
     filename = download(asset_id)
 
@@ -94,6 +95,7 @@ def processVideo(asset_id):
             and file_extension != ".m4v" and file_extension != ".mp4"):
         os.remove(filename)
         print("unsupported video format or picture")
+        print("file removed")
         return
 
     print("Succesfully downloaded: " + filename)
