@@ -81,7 +81,15 @@ def webhook_post():
 
 def processVideo(asset_id):
     filename = download(asset_id)
-    
+
+    file, file_extension = os.path.splitext(filename)
+
+    if(file_extension != ".mov" and file_extension != ".avi"
+            and file_extension != ".m4v" and file_extension != ".mp4"):
+        os.remove(filename)
+        print("unsupported video format or picture")
+        return
+
     print("Succesfully downloaded: " + filename)
     
     print("Starting facial recognition")
