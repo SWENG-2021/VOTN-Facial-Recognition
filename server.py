@@ -47,7 +47,8 @@ def downloadImage(asset_id):
 
     directory_name, file_extension = os.path.splitext(filename)
 
-    if ((file_extension != ".jpeg") or (file_extension != ".png")):
+    if ((file_extension != ".jpg") or (file_extension != ".png")):
+        print("unsupported image extension")
         return
     else:
         print("File is a compatible image!")
