@@ -26,7 +26,7 @@ def addpicture_post():
     print(timestamp)
     print(signature)
     print(os.getenv("CUSTOM_ACTIONS_SECRET"))
-    verified = verifyWebhook("v0", timestamp, request.json, signature, os.getenv("SECRET"))
+    verified = verifyWebhook("v0", timestamp, request.json, signature, os.getenv("CUSTOM_ACTIONS_SECRET"))
     print(verified)
     if verified:
         asset_id = request.json["resource"]["id"]
