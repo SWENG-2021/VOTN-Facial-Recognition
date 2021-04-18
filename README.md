@@ -7,8 +7,6 @@ A facial recognition app integrated into frame.io workflow.
 
 An Ubuntu server, which is running on AWS (in our use-case) and receives webhooks from frame.io, when new videos are uploaded. It downloads the new videos, runs recognition on them and sends the results of the recognition back to frame.io (video description). It allows for new photos to be added in the recognition database via custom actions functionality. 
 
-https://user-images.githubusercontent.com/24837651/115148231-93121700-a056-11eb-9da7-f72f19afe7fb.mp4
-
 ## How can I try it out?
 
 Please view our [Getting Started Guide](https://github.com/SWENG-2021/VOTN-Facial-Recognition/blob/main/GettingStarted.md).
