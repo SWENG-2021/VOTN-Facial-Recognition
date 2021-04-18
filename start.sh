@@ -11,10 +11,6 @@ sudo sed -i 's/_serv1_/www.votn.com/' /etc/nginx/sites-available/votn.com
 sudo sed -i 's/_serv2_/votn.com/' /etc/nginx/sites-available/votn.com
 sudo ln -f -s /etc/nginx/sites-available/votn.com /etc/nginx/sites-enabled/votn.com
 sudo service nginx restart
-sudo pip3 install virtualenv
-sudo virtualenv venv-api
-sudo source venv-api/bin/activate
 sudo pip3 install -r requirements.txt
-sudo pip3 install gunicorn
 sudo gunicorn server:app
 
