@@ -1,6 +1,6 @@
 ## Getting Started Guide
 
-Step by step guide to make sure you can use our system on your on server.
+Step by step guide to make sure you can use our system on your server.
 
 ## Prerequisites
 
