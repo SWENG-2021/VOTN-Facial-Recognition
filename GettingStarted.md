@@ -52,6 +52,7 @@ This should install the required libraries and other software.
 3. Configure nginx server: 
 
 First run: 
+
 `sudo rm /etc/nginx/sites-enabled/default` 
 
 `sudo rm /etc/nginx/sites-available/default`
