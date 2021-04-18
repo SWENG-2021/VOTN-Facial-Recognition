@@ -13,7 +13,7 @@ Please view our [Getting Started Guide](https://github.com/SWENG-2021/VOTN-Facia
 
 ## How can I contribute to the project? 
 
-The project was developed as part of the Software Engineering module, our team took in 3rd year (Conor, Michael) and in 2nd year (Barry, David, Holly, Pavel). Feel free to reach out to us if you have any ideas for further development. If this project was added as one of the choices for the next year Software Engineering module and you have happened to choose it, here is a list of improvements we were thinking of, but did not have enough time to deliver:
+The project was developed as part of the Software Engineering module, our team took in 3rd year (Conor, Michal) and in 2nd year (Barry, David, Holly, Pavel). Feel free to reach out to us if you have any ideas for further development. If this project was added as one of the choices for the next year Software Engineering module and you have happened to choose it, here is a list of improvements we were thinking of, but did not have enough time to deliver:
 
 1. Create docs not only for AWS, but for other popular cloud platforms such as GCloud and Azure. Think about how this app could be changed to work with Google's App Engine infrastructure. 
 2. Create a user interface to allow for better control over which pictures are added where. 
