@@ -121,9 +121,13 @@ Here the strings token, secret and custom_actions_secret come from steps 2-4. Ma
 To set up ssl you will have to run the following commands:
 
 `sudo apt-get install software-properties-common`
+
 `sudo add-apt-repository ppa:certbot/certbot`
+
 `sudo apt-get update`
+
 `sudo apt-get install python-certbot-nginx`
+
 `sudo certbot --nginx`
 
 This sets up an SSL certificate for your server. You might need to wait for sometime before the changes take place. 
