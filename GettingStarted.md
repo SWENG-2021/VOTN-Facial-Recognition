@@ -52,43 +52,43 @@ This should install the required libraries and other software.
 3. Configure nginx server: 
 
 First run: 
-`sudo rm /etc/nginx/sites-enabled/default 
+`sudo rm /etc/nginx/sites-enabled/default` 
 
-sudo rm /etc/nginx/sites-available/default`
+`sudo rm /etc/nginx/sites-available/default`
 
 This will remove the default configuration. 
 
 Now run: 
 
-`sudo touch /etc/nginx/sites-available/yourdomain.com
+`sudo touch /etc/nginx/sites-available/yourdomain.com`
 
-sudo chown -R $USER:$USER /etc/nginx/sites-available/yourdomain.com`
+`sudo chown -R $USER:$USER /etc/nginx/sites-available/yourdomain.com`
 
 This creates a new configuration file and changes its owner. 
 
 Open the file you just created in nano or any other editor you like and paste this in:
 
-`server {
+`server {`
 
-listen 80;
+`listen 80;`
 
-server_name www.yourdomain.com yourdomain.com;
+`server_name www.yourdomain.com yourdomain.com;`
 
-location / {
+`location / {`
 
-proxy_pass http://127.0.0.1:8000/;
+`proxy_pass http://127.0.0.1:8000/;`
 
-}
+`}
 
-}`
+`}`
 
 This is the server configuration (nginx proxy). 
 
 Run:
 
-`sudo ln -f -s /etc/nginx/sites-available/yourdomain.com /etc/nginx/sites-enabled/yourdomain.com
+`sudo ln -f -s /etc/nginx/sites-available/yourdomain.com /etc/nginx/sites-enabled/yourdomain.com`
 
-sudo service nginx restart`
+`sudo service nginx restart`
 
 ## Step 3, setting up frame.io
 
