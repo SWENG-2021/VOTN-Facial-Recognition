@@ -35,6 +35,61 @@ NB: If you are using a low-perfomance machine or a free-tier machine, we suggest
 
 ## Step 2, product installation
 
+NB: For this step you will need to have git installed, on AWS machines and other cloud services it is usually available out of the box, here is a guide on [how to install git on linux](https://git-scm.com/book/en/v2/Getting-Started-Installing-Git). 
+
+1. Run this command in the folder where you would like your files to be located:
+
+`git clone https://github.com/SWENG-2021/VOTN-Facial-Recognition`
+
+Alternatively, you could clone the repo to your local machine and use FTP, like filezilla, but this is out of scope of this guide. 
+
+2. Go into the folder VOTN-Facial-Recognition and run the following command:
+
+`sudo sh install.sh`
+
+This should install the required libraries and other software. 
+
+3. Configure nginx server: 
+
+First run: 
+`sudo rm /etc/nginx/sites-enabled/default 
+
+sudo rm /etc/nginx/sites-available/default`
+
+This will remove the default configuration. 
+
+Now run: 
+
+`sudo touch /etc/nginx/sites-available/yourdomain.com
+
+sudo chown -R $USER:$USER /etc/nginx/sites-available/yourdomain.com`
+
+This creates a new configuration file and changes its owner. 
+
+Open the file you just created in nano or any other editor you like and paste this in:
+
+`server {
+
+listen 80;
+
+server_name www.yourdomain.com yourdomain.com;
+
+location / {
+
+proxy_pass http://127.0.0.1:8000/;
+
+}
+
+}`
+
+This is the server configuration (nginx proxy). 
+
+Run:
+
+`sudo ln -f -s /etc/nginx/sites-available/yourdomain.com /etc/nginx/sites-enabled/yourdomain.com
+
+sudo service nginx restart`
+
 ## Step 3, setting up frame.io
 
 1. Go to [frame.io developer website](https://developer.frame.io/) and log in
