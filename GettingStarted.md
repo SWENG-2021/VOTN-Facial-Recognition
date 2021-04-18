@@ -19,15 +19,15 @@ We suggest using a free-tier AWS EC2 instance for testing, you easily create suc
 
 6. Allocate a new Elastic IP address for your EC2 instance (Elastic IP product). In "Actions", choose "associate address" and associate the address you just allocated with the EC2 instance you created. 
 
-Create a new public hosted zone (Amazon Route 53 product) with the domain you got from freenom. Once public hosted zone is created, you’ll be presented with 2 default record sets for your domain. In here, take note all of the 4 Nameservers (Type NS). 
+7. Create a new public hosted zone (Amazon Route 53 product) with the domain you got from freenom. Once public hosted zone is created, you’ll be presented with 2 default record sets for your domain. In here, take note all of the 4 Nameservers (Type NS). 
 
-Create another record sets for your domain, one with www name and one without it. All pointing to your Elastic IP you set to your EC2 instance. See screenshot below.
+8. Create another record sets for your domain, one with www name and one without it. All pointing to your Elastic IP you set to your EC2 instance. See screenshot below.
 
 ![1_9q-ERGrntV1aF10mU71qsg](https://user-images.githubusercontent.com/24837651/115149012-f6ea0f00-a059-11eb-89ba-150fac00e561.png)
 
-Once you’ve have setup the 2 additional record sets, the last step is to just point your domain to use the Nameservers provided by Route53 service.
+9. Once you’ve have setup the 2 additional record sets, the last step is to just point your domain to use the Nameservers provided by Route53 service.
 
-Finally, login to your Freenom account go to Services->My Domains. From here, choose the domain and click on Manage Domain. Then go to, Management Tools, then Nameservers. From here, select custom nameservers and just enter all the 4 nameservers and hit on the save button. Just give it a couple of minutes and you would now be able to access your app in your EC2 instance with the domain you choose.
+10. Finally, login to your Freenom account go to Services->My Domains. From here, choose the domain and click on Manage Domain. Then go to, Management Tools, then Nameservers. From here, select custom nameservers and just enter all the 4 nameservers and hit on the save button. Just give it a couple of minutes and you would now be able to access your app in your EC2 instance with the domain you choose.
 
 ## Step 2, setting up frame.io
 
