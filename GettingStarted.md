@@ -8,6 +8,8 @@ You should have an Ubuntu Linux server, to which you have access either directly
 
 We suggest using a free-tier AWS EC2 instance for testing, you can easily create such instance in 3-4 minutes, after you registered on AWS. Make sure to choose options which are eligible for tier, otherwise you will have to pay for the resources you use. There is a lot of guides on how to create an EC2 instance on AWS, if you have trouble you can have a look at this one, for example, [Amazon EC2 Basics & Instances Tutorial](https://www.youtube.com/watch?v=iHX-jtKIVNA). 
 
+NB: If you are using a low-perfomance machine or a free-tier machine, we suggest you allocate a swap file. Here is a guide on how to do that [Swap file guide](https://linuxize.com/post/create-a-linux-swap-file/). We suggest you allocate 4GiB, if you are using a machine with 1GiB of RAM (free-tier). 
+
 ## Step 1, obtaining a free domain and setting up DNS
 
 1. Go to [freenom.com](https://www.freenom.com/ru/index.html?lang=ru) and register for an account.
