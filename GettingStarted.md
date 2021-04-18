@@ -78,7 +78,7 @@ Open the file you just created in nano or any other editor you like and paste th
 
 `proxy_pass http://127.0.0.1:8000/;`
 
-`}
+`}`
 
 `}`
 
@@ -117,8 +117,23 @@ Here the strings token, secret and custom_actions_secret come from steps 2-4. Ma
 
 ## Step 4, setting up SSL
 
+To set up ssl you will have to run the following commands:
+
+`sudo apt-get install software-properties-common`
+`sudo add-apt-repository ppa:certbot/certbot`
+`sudo apt-get update`
+`sudo apt-get install python-certbot-nginx`
+`sudo certbot --nginx`
+
+This sets up an SSL certificate for your server. You might need to wait for sometime before the changes take place. 
+
 ## Step 5, testing
   
+To test the system go into the folder where server.py is located. You need to run the following command: 
+
+`sudo gunicorn server:app`
+
+If this succeeds you will not see any error messages, now the webhook listener is active. Go into your user frame.io account, try uploading some videos and adding new pictures into the database. Check out the logs to see if there are any erros. 
 
 ## References
 
