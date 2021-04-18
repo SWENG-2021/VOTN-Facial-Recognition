@@ -8,7 +8,7 @@ You should have an Ubuntu Linux server, to which you have access either directly
 
 We suggest using a free-tier AWS EC2 instance for testing, you can easily create such instance in 3-4 minutes, after you registered on AWS. Make sure to choose options which are eligible for tier, otherwise you will have to pay for the resources you use. There is a lot of guides on how to create an EC2 instance on AWS, if you have trouble you can have a look at this one, for example, [Amazon EC2 Basics & Instances Tutorial](https://www.youtube.com/watch?v=iHX-jtKIVNA). 
 
-Please specify the security groups as follows: 
+Please specify the security group as follows: 
 
 ![1_WJRhXaUU0DjvlCwQXUj6AA](https://user-images.githubusercontent.com/24837651/115159314-77286880-a08a-11eb-87dc-cc4003b19b50.png)
 
