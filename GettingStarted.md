@@ -51,9 +51,9 @@ NB: If you are using a low-perfomance machine or a free-tier machine, we suggest
   
 Now, make sure not to change any entry that is already in the file. You will have to add 3 environment variables, like that:
 
-`FRAME_IO_TOKEN="token"`
-`SECRET="secret"`
-`CUSTOM_ACTIONS_SECRET="custom_actions_secret"` 
+FRAME_IO_TOKEN="token"
+SECRET="secret"
+CUSTOM_ACTIONS_SECRET="custom_actions_secret"
 
 Here the strings token, secret and custom_actions_secret come from steps 2-4. Make sure not to mix them up. 
 
