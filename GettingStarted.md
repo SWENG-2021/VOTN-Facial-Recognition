@@ -33,9 +33,30 @@ NB: If you are using a low-perfomance machine or a free-tier machine, we suggest
 
 10. Finally, login to your Freenom account go to Services->My Domains. From here, choose the domain and click on Manage Domain. Then go to, Management Tools, then Nameservers. From here, select custom nameservers and just enter all the 4 nameservers and hit on the save button. Just give it a couple of minutes and you would now be able to access your app in your EC2 instance with the domain you choose.
 
-## Step 2, setting up frame.io
+## Step 2, product installation
 
-## Step 3, product installation
+## Step 3, setting up frame.io
+
+1. Go to [frame.io developer website](https://developer.frame.io/) and log in
+
+2. Click on "Developer tools" and choose "tokens". Here you will need to create a token for your account. Name it as you like and click "select all scopes", then click "submit". Important: copy the token after it was created and store it in secure place. If somebody gets your token, they will be able to do anything they like with your account, like deleting videos. 
+
+3. Click on "Developer tools" and choose "webhooks". Click on "create webhook". Name it as you wish. For the url please specify: https://www.yourdomain.com/webhook. Select any team for which you would like the webhook to operate. If you want multiple teams, you will have to create multiple webhooks. Check only asset.ready. Click on "submit". When the webhook is created, copy its secret to a secure location. You will have access to the secret in the future in case you lose so do not worry. 
+
+4. Click on "Developer tools" and choose "custom actions". Click on "create a custom action". Name it as you wish and describe it as you like. For the url please specify: https://www.yourdomain.com/addpicture. Select any team for which you would like the custom action to operate. If you want multiple teams, you will have to create multiple custom actions. For event specify "picture.added". Allow collaborators to have access. Click on "submit". When the custom action is created, copy its secret to a secure location. You will have access to the secret in the future in case you lose so do not worry. 
+
+5. SSH into your server or connect by any other means (see step 2). Now go to root directory and go into etc folder (cd /etc). In this folder run: 
+
+  `sudo nano environment`
+  
+Now, make sure not to change any entry that is already in the file. You will have to add 3 environment variables, like that:
+
+`FRAME_IO_TOKEN="token"
+SECRET="secret"
+CUSTOM_ACTIONS_SECRET="custom_actions_secret"` 
+
+Here the strings token, secret and custom_actions_secret come from steps 2-4. Make sure not to mix them up. 
+
 
 ## Step 4, setting up SSL
 
