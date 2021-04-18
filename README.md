@@ -20,3 +20,7 @@ The project was developed as part of the Software Engineering module, our team t
 3. Allow users to set who they want to detect in particular videos to speed up recognition. For example, if we know that this footage cannot contain people from French rugby team, there is no need to search for them.
 4. Automate the installation process further, see [Getting Started Guide](https://github.com/SWENG-2021/VOTN-Facial-Recognition/blob/main/GettingStarted.md) and think of ways you can make it easier for the user. 
 
+## How to report a bug?
+
+Feel free to open an issue.
+
