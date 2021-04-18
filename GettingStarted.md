@@ -1,5 +1,7 @@
 ## Getting Started Guide
 
+Step by step guide to make sure you can use our system on your on server.
+
 ## Prerequisites
 
 You should have an Ubuntu Linux server, to which you have access either directly or through ssh client. Our suggestion is using AWS, as this was initially specified by our client and the whole system was tested on such infrastructure. If you are not using AWS, the guide will still be very useful to you, though some parts of it will be not applicable. 
