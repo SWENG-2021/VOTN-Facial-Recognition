@@ -4,7 +4,7 @@
 
 You should have an Ubuntu Linux server, to which you have access either directly or through ssh client. Our suggestion is using AWS, as this was initially specified by our client and the whole system was tested on such infrastructure. If you are not using AWS, the guide will still be very useful to you, though some parts of it will be not applicable. 
 
-We suggest using a free-tier AWS EC2 instance for testing, you easily create such instance in 3-4 minutes, after you registered on AWS. Make sure to choose options which are eligible for tier, otherwise you will have to pay for the resources you use. There is a lot of guides on how to create an EC2 instance on AWS, if you have trouble you can have a look at this one, for example, [Amazon EC2 Basics & Instances Tutorial](https://www.youtube.com/watch?v=iHX-jtKIVNA). 
+We suggest using a free-tier AWS EC2 instance for testing, you can easily create such instance in 3-4 minutes, after you registered on AWS. Make sure to choose options which are eligible for tier, otherwise you will have to pay for the resources you use. There is a lot of guides on how to create an EC2 instance on AWS, if you have trouble you can have a look at this one, for example, [Amazon EC2 Basics & Instances Tutorial](https://www.youtube.com/watch?v=iHX-jtKIVNA). 
 
 ## Step 1, obtaining a free domain and setting up DNS
 
