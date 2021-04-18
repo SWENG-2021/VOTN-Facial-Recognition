@@ -12,5 +12,4 @@ sudo sed -i 's/_serv2_/votn.com/' /etc/nginx/sites-available/votn.com
 sudo ln -f -s /etc/nginx/sites-available/votn.com /etc/nginx/sites-enabled/votn.com
 sudo service nginx restart
 sudo pip3 install -r requirements.txt
-sudo gunicorn server:app
 
