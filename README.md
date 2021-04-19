@@ -9,7 +9,7 @@ An Ubuntu server, which is running on AWS (in our use-case) and receives webhook
 
 ## How can I try it out?
 
-Please view our [Getting Started Guide](https://github.com/SWENG-2021/VOTN-Facial-Recognition/blob/main/GettingStarted.md).
+Please view our [Getting Started Guide](https://github.com/SWENG-2021/VOTN-Facial-Recognition/blob/main/GettingStarted.md) and [User Guide](https://github.com/SWENG-2021/VOTN-Facial-Recognition/blob/main/UserGuide.md).
 
 ## How can I contribute to the project? 
 
