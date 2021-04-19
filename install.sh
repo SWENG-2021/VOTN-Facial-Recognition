@@ -7,5 +7,5 @@ sudo pip3 install face_recognition -vvv
 sudo pip3 install scikit-build -vvv
 sudo pip3 install opencv-python -vvv
 sudo pip3 install gunicorn -vvv
-sudo pip3 install frameioclient -vvv
+sudo pip3 install -Iv frameioclient==0.9.1 -vvv
 sudo pip3 install flask -vvv
