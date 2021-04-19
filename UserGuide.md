@@ -1,4 +1,4 @@
-## User guide
+## User Guide
 
 Once everything is set up it is extremely easy to use our system, you just login to your frame.io account and upload videos, which are automatically analyzed. Here is a kind 
 of output you might want to expect:
