@@ -145,6 +145,8 @@ To test the system go into the folder where server.py is located. You need to ru
 
 If this succeeds you will not see any error messages, now the webhook listener is active. Go into your user frame.io account, try uploading some videos and adding new pictures into the database. Check out the logs to see if there are any erros. 
 
+Here is a [User Guide](https://github.com/SWENG-2021/VOTN-Facial-Recognition/blob/main/UserGuide.md).
+
 ## References
 
 1. [Deploying python flask to AWS and installing SSL](https://medium.com/@samuel.ngigi/deploying-python-flask-to-aws-and-installing-ssl-1216b41f8511), a lot of information was copied from there, but we laid it out a bit differently to make it more applicable for our situation.
