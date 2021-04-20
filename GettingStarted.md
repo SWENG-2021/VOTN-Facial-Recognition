@@ -56,6 +56,13 @@ Alternatively, you could clone the repo to your local machine and use FTP, like 
 
 This should install the required libraries and other software. 
 
+Run:
+
+`python3 test_open_cv.py`
+
+There should not be any error messages. Then scroll down to see if FFMPEG was detected. If it was detected, you should see a number of "YES"s for the parts of FFMPEG in the 
+build logs printed by the test script.
+
 3. Configure nginx server: 
 
 First run: 
