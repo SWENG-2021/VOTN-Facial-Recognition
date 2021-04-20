@@ -1,6 +1,6 @@
 ## Getting Started Guide
 
-Step by step guide to make sure you can use our system on your server.
+Step by step guide to make sure you can use our system on your server. It assumes you know something about working in Linux terminal and have general understanding of how domains work.
 
 ## Prerequisites
 
@@ -12,7 +12,7 @@ Please specify the security group as follows:
 
 ![1_WJRhXaUU0DjvlCwQXUj6AA](https://user-images.githubusercontent.com/24837651/115159314-77286880-a08a-11eb-87dc-cc4003b19b50.png)
 
-To connect to your instance, you can use standard terminal in Linux or Putty on Windows, you will have to convert your pem key into a ppk so as to use Putty. This can be done with PuttyGen. Here is a [Putty tutorial](https://www.siteground.com/tutorials/ssh/putty/)
+To connect to your instance, you can use standard terminal in Linux or Putty on Windows, you will have to convert your pem key into a ppk so as to use Putty. This can be done with PuttyGen. Here is a [Putty tutorial](https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/putty.html)
 
 
 NB: If you are using a low-perfomance machine or a free-tier machine, we suggest you allocate a swap file. Here is a guide on how to do that [Swap file guide](https://linuxize.com/post/create-a-linux-swap-file/). We suggest you allocate 4GiB, if you are using a machine with 1GiB of RAM (free-tier). 
