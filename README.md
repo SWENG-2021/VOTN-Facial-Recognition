@@ -19,6 +19,7 @@ The project was developed as part of the Software Engineering module, our team t
 2. Create a user interface to allow for better control over which pictures are added where. 
 3. Allow users to set who they want to detect in particular videos to speed up recognition. For example, if we know that this footage cannot contain people from French rugby team, there is no need to search for them.
 4. Automate the installation process further, see [Getting Started Guide](https://github.com/SWENG-2021/VOTN-Facial-Recognition/blob/main/GettingStarted.md) and think of ways you can make it easier for the user. 
+5. Create a more advanced recognition model and implement some additional useful features.
 
 ## How to report a bug?
 
