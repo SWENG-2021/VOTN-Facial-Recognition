@@ -21,6 +21,8 @@ An Ubuntu server, which is running on AWS (in our use-case) and receives webhook
 
 6. install.sh - an installation script, which sets up all the dependecies
 
+7. A video folder (see Blackboard submission)
+
 ## How can I try it out?
 
 Please view our [Getting Started Guide](https://github.com/SWENG-2021/VOTN-Facial-Recognition/blob/main/GettingStarted.md) and [User Guide](https://github.com/SWENG-2021/VOTN-Facial-Recognition/blob/main/UserGuide.md).
