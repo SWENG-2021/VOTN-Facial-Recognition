@@ -7,3 +7,5 @@ You do not have to worry about the software dependecies, but you will be able to
 `FFmpeg`, `python3`, `nginx`, `cmake`, `face_recognition`, `scikit-build`, `python opencv`, `gunicorn`, `frameioclient`, `flask`. 
 
 Here is a link to an [exteded demo of our system 14 mins](https://www.youtube.com/watch?v=ebw4dBJzlug)
+
+Here is a link to a [video version of the Getting Started Guide](https://www.youtube.com/watch?v=wHYoGPc_HeA)
