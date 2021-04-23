@@ -8,4 +8,4 @@ You do not have to worry about the software dependecies, but you will be able to
 
 Here is a link to an [exteded demo of our system 14 mins](https://www.youtube.com/watch?v=ebw4dBJzlug)
 
-Here is a link to a [video version of the Getting Started Guide](https://www.youtube.com/watch?v=wHYoGPc_HeA)
+Here is a link to a [video version of the Getting Started Guide](https://www.youtube.com/watch?v=CyKn7UV0jCo)
